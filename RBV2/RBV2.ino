@@ -44,6 +44,7 @@ digitalWrite(LED, HIGH);
 // * reverse(duration, speed) drive both motors in reverse for "duration" in ms, at speed (0-255)
 // * turnLeft(duration, speed) drive the left motor in reverse, right motor forward for "duration" in ms, and speed (0-255)
 // * turnRight(duration, speed) drive the left motor forward, right motor in reverse for "duration" in ms, and speed (0-255)
+// * stop() stops the robot and applies the brakes.  For functions with a duration, this is already applied
 // * 
 //******************************************************************************************************************************/
 
