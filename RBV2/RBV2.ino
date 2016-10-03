@@ -1,3 +1,4 @@
+// These are the pin connections for the motor controller, they won't change.
 const byte A_EN = 2;    //right wheel
 const byte A_RPWM = 3;    //(forward)
 const byte A_DIS = 4;    
@@ -72,7 +73,7 @@ digitalWrite(LED, HIGH);
   
 void loop()
 {
-  
+  //Nothing to put here, we only want our code to run once.
 }
 
 void forward (int duration, byte speed)
