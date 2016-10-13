@@ -11,7 +11,7 @@
   const byte B_DIS = 7;   
   const byte B_LPWM = 10;  //(reverse)
   const byte goButton = 14; //this button will execute our functions
-  //test change
+  //test change again
   
   // Let's declare some things first.  Leave these ones alone...
   #define pinMode(A_EN, OUTPUT);
