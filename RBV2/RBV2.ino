@@ -22,7 +22,7 @@
 void setup()
 {
   bool oldMotorController = true; //set this to true if your robot is using the old-style, L298 dual H-bridge motor controller
-  
+  //test
   Serial.begin(115200); //Setup serial port for debugging our code
   //  Look for button push, then execute loop
   //wait(); //this function is waiting for a button push to make the robot go
