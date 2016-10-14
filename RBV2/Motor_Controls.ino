@@ -1,4 +1,12 @@
-// These are the pin connections for the motor controller, they won't change.
+
+  const byte goButton = 52; //this button will execute our functions
+  const byte goButtonPullUp = 53;
+//
+  #define pinMode (goButton, INPUT);
+  #define pinMode (goButtonPullUp, OUTPUT);
+  #define digitalWrite (goButtonPullUp, HIGH);
+
+// These are the pin connections for the motor controllers, they won't change.
 #if (oldMotorController == false)
 
   const byte A_EN = 2;    //right wheel
@@ -10,10 +18,9 @@
   const byte B_RPWM = 9;   //(forward)
   const byte B_DIS = 7;   
   const byte B_LPWM = 10;  //(reverse)
-  const byte goButton = 14; //this button will execute our functions
-  //test change again and again
+
+
   
-  // Let's declare some things first.  Leave these ones alone...
   #define pinMode(A_EN, OUTPUT);
   #define pinMode(A_DIS, OUTPUT);
   #define pinMode(B_EN, OUTPUT);
@@ -25,7 +32,13 @@
   #define pinMode(B_LPWM, OUTPUT);
   #define pinMode(goButton, INPUT);
     
-  
+  void wait()
+  {
+      while  (digitalRead(goButton) == LOW);
+    {
+      stop();
+    }
+  }
   void forward (int duration, byte speed)
   {
     Serial.println("Forward");
@@ -104,13 +117,8 @@
     analogWrite(B_LPWM, (255-speed));
   }
   
-  void wait()
-  {
-      while  (digitalRead(goButton) == LOW);
-    {
-      stop();
-    }
-  }
+
+  
   
   
   /*
@@ -153,6 +161,14 @@
   pinMode(leftEnablePin, OUTPUT);
   pinMode(leftForwardPin, OUTPUT);
   pinMode(leftBackwardPin, OUTPUT);
+
+  void wait()
+  {
+      while  (digitalRead(goButton) == LOW);
+    {
+      stop();
+    }
+  }
   
   void forward(int duration, byte speed){
     Serial.println("Drive Forward");
