@@ -31,7 +31,8 @@ void setup()
   //wait(); //this function is waiting for a button push to make the robot go
 
   //First command, etc.
-  //forward(1000, 100); 
+  forward(1000, 100); 
+  
   // turnLeft(250, 100);
   // reverse(2000, 100);
   
@@ -47,8 +48,9 @@ void setup()
   
   // for (int i = 0; i < 4; i++)  //for a determined number of repetitions, do this:
   // {
-   forward(1000, 100);
-  // turnRight(725, 100);
+   //forward(1000, 100);
+ //  stop();
+ //  turnRight(725, 100);
 
   
  // forwardDistance(24, 150);
