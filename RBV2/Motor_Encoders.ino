@@ -32,8 +32,8 @@ Encoder rightMotor(58, 59);
 void forwardDistance(float distance, byte speed) //distance in inches
 {
   Serial.println("Forward using encoders");
-  leftMotor.write(0);
-  rightMotor.write(0);
+//  leftMotor.write(0);
+ // rightMotor.write(0);
   
   float leftMotr;
   float rightMotr;
@@ -43,8 +43,8 @@ void forwardDistance(float distance, byte speed) //distance in inches
     {
       leftMotorF(speed);
       rightMotorF(speed);
-      leftMotr = leftMotor.read() * 0.45;
-      rightMotr = rightMotor.read()* 0.45;
+      leftMotr = leftMotor.read();
+      rightMotr = rightMotor.read();
       Serial.print("Left = ");
       Serial.print(leftMotr);
       Serial.print(", Right = ");

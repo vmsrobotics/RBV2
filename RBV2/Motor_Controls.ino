@@ -1,5 +1,18 @@
+void setup()
+{
+  Serial.begin(115200); //Setup serial port for debugging our code
+  studentCode();
+}
 
-//  const byte goButton = 52; //this button will execute our functions
+void loop()
+{
+
+//
+
+} 
+
+  //  const byte goButton = 52; //this button will execute our functions
+
 //  const byte goButtonPullUp = 53;
 ////
 //  #define pinMode (goButton, INPUT);
