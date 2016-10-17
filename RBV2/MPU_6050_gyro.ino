@@ -77,7 +77,7 @@
 //}
 //
 //void loop() {
-//  delay(250); //uncomment for full speed, this delay is just to assist with code writing
+//  delay(250); //comment this out for full speed, this delay is just to assist with code writing
 //    // read raw accel/gyro measurements from device
 //  //  accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
 //

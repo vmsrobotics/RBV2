@@ -31,7 +31,7 @@ void loop()
   const byte B_RPWM = 9;   //(forward)
   const byte B_DIS = 7;   
   const byte B_LPWM = 10;  //(reverse)
-  const byte goButton = 14; 
+  const byte goButton = 52; 
   
   #define pinMode(A_EN, OUTPUT);
   #define pinMode(A_DIS, OUTPUT);
@@ -42,7 +42,7 @@ void loop()
   #define pinMode(A_LPWM, OUTPUT);
   #define pinMode(B_RPWM, OUTPUT);
   #define pinMode(B_LPWM, OUTPUT);
-  #define pinMode(goButton, INPUT);
+  #define pinMode(goButton, INPUT_PULLUP);
     
  
   void forward (int duration, byte speed)
@@ -125,7 +125,7 @@ void loop()
   
  void wait()
   {
-      while  (digitalRead(goButton) == LOW);
+    while  (digitalRead(goButton) == HIGH);
     {
       stop();
     }
