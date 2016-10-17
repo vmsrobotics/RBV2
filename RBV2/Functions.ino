@@ -15,6 +15,7 @@
 // * leftMotorR(speed); drive the left motor in reverse at speed (0-255); you'll have to implement a stop() function
 // * rightMotorR(speed); drive the right motor in reverse at speed (0-255); you'll have to implement a stop() function
 // * sonarSerial(); prints the sonar readings on the serial monitor
+// * colorRead(); reads color from TCS230 color sensor and prints the results on the serial monitor
 // *****************************************************************************************************************************
 // * Pin Assignments
 // * 2 Motor Controller A_EN
