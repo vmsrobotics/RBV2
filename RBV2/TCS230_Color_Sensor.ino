@@ -36,62 +36,62 @@
 //S1 to LOW. This feature comes in handy when we are using the module on system with low clock.
 //
 //Although different colors have different sensitivity, for a normal use it won’t make much difference.
-//The UNO here sends a signal to the module to detect colors and the data received by the module is shown in the serial monitor.
+//The DUE here sends a signal to the module to detect colors and the data received by the module is shown in the serial monitor.
 //
-//The UNO detects three color intensities separately and shows them on serial output.
+//The DUE detects three color intensities separately and shows them on serial output.
 //
-//The Uno can detect the signal pulse duration by which we can get the frequency of square wave sent by module. With the frequency at hand we can match it with color on sensor.
+//The DUE can detect the signal pulse duration by which we can get the frequency of square wave sent by module. With the frequency at hand we can match it with color on sensor.
 //
-//Int frequency = pulseIn(10, LOW);
+//Int frequency = pulseIn(19, LOW);
 // 
-//As by above condition the UNO reads pulse duration on 10th pin of UNO and stores it value in “frequency” integer.
+//As by above condition the DUE reads pulse duration on 19th pin of DUE and stores it value in “frequency” integer.
 //We are going to do this for all three colors for color recognition. All three color intensities are shown by frequencies on 16x2 LCD.
 // 
 // */
-// 
-//int OutPut= 10;//naming pin10 of uno as output
-//
-//unsigned int frequency = 0;
-//  
-//void setup()
-//{
-//  // set up the LCD's number of columns and rows
-//  Serial.begin(115200);
-//
-//  pinMode(2, OUTPUT);
-//  pinMode(3, OUTPUT);//PINS 2, 3,4,5 as OUTPUT
-//  pinMode(4, OUTPUT);
-//  pinMode(5, OUTPUT);
-//  pinMode(10, INPUT);//PIN 10 as input
-//
-//  digitalWrite(2,HIGH);
-//  digitalWrite(3,LOW);//setting frequency selection to 20%
-//}
-//
-//void loop()
-//{
-//  Serial.print("R=");//printing name
-//  digitalWrite(4,LOW);
-//  digitalWrite(5,LOW);//setting for RED color sensor
-//  frequency = pulseIn(OutPut, LOW);//reading frequency
-//  Serial.print(frequency);//printing RED color frequency
-//  Serial.print("  ");
-//  delay(500);
-// 
-//  Serial.print("B=");// printing name
-//  digitalWrite(4,LOW);
-//  digitalWrite(5,HIGH);// setting for BLUE color sensor
-//  frequency = pulseIn(OutPut, LOW);// reading frequency
-//  Serial.print(frequency);// printing BLUE color frequency
-//  Serial.print("  ");
-//  delay(500);
-// 
-//  Serial.print("G=");// printing name
-//  digitalWrite(4,HIGH);
-//  digitalWrite(5,HIGH);// setting for GREEN color sensor
-//  frequency = pulseIn(OutPut, LOW);// reading frequency
-//  Serial.print(frequency);// printing GREEN color frequency
-//  Serial.print("    ");
-//  delay(500);        
-//}         
-// 
+
+
+unsigned int frequency = 0;
+const byte S0 = 15;
+const byte S1 = 16;
+const byte S2 = 17;
+const byte S3 = 18;
+const byte OutPut = 19;
+
+pinMode(S0, OUTPUT);
+pinMode(S1, OUTPUT);//PINS S0-S3 as OUTPUT
+pinMode(S2, OUTPUT);
+pinMode(S3, OUTPUT);
+pinMode(OutPut, INPUT);//OUT PIN from sensor as input to DUE
+
+
+
+void colorRead()
+  {
+  digitalWrite(S0,HIGH);
+  digitalWrite(S1,LOW); //setting frequency selection to 20%
+  
+  Serial.print("R=");//printing name
+  digitalWrite(S2,LOW);
+  digitalWrite(S3,LOW);//setting for RED color sensor
+  frequency = pulseIn(OutPut, LOW);//reading frequency
+  Serial.print(frequency);//printing RED color frequency
+  Serial.print("  ");
+  delay(500);
+ 
+  Serial.print("B=");// printing name
+  digitalWrite(S2,LOW);
+  digitalWrite(S3,HIGH);// setting for BLUE color sensor
+  frequency = pulseIn(OutPut, LOW);// reading frequency
+  Serial.print(frequency);// printing BLUE color frequency
+  Serial.print("  ");
+  delay(500);
+ 
+  Serial.print("G=");// printing name
+  digitalWrite(S2,HIGH);
+  digitalWrite(S3,HIGH);// setting for GREEN color sensor
+  frequency = pulseIn(OutPut, LOW);// reading frequency
+  Serial.print(frequency);// printing GREEN color frequency
+  Serial.print("    ");
+  delay(500);        
+}         
+ 

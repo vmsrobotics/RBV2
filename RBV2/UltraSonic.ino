@@ -1,3 +1,8 @@
+//    VCC to +5V
+//    GND to GROUND
+//    Trig to pin 22
+//    Echo to pin 23
+
 #include <NewPing.h>
 
 #define TRIGGER_PIN  22  // Arduino pin tied to trigger pin on the ultrasonic sensor.
@@ -6,40 +11,39 @@
 
 NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE); // NewPing setup of pins and maximum distance.
 
-void sonarTurnRight(int bumpDistance, byte speed, int turnDuration) 
-{ 
-  int distance = sonar.ping_in();
-  int counter = 0;
-  leftMotorF(speed);
-  rightMotorF(speed);
-  
-  delay(50);
-  while (counter < 4)
-  {
-    distance = sonar.ping_in();
-//    delay(50);
+void sonarTurnRight(int bumpDistance, byte speed, int turnDuration, int turns) 
+  { 
+    int distance = sonar.ping_in();
+    int counter = 0;
     leftMotorF(speed);
     rightMotorF(speed);
-    Serial.print("Distance ");
-    Serial.print(distance);
-    Serial.println(" in");
     
-    while (distance < bumpDistance) 
-        {
-          Serial.print("Distance ");
-          Serial.print(distance);
-          Serial.println(" in");
-          stop();
-          delay(200);
-          turnRight(turnDuration, 100);
-          distance = sonar.ping_in();
-          counter++;
-          Serial.print("#of turns ");
-          Serial.print(counter);
-           
-      }
+    delay(50);
+    while (counter < turns)
+    {
+      distance = sonar.ping_in();
+      leftMotorF(speed);
+      rightMotorF(speed);
+      Serial.print("Distance ");
+      Serial.print(distance);
+      Serial.println(" in");
+      
+      while (distance < bumpDistance) 
+          {
+            Serial.print("Distance ");
+            Serial.print(distance);
+            Serial.println(" in");
+            stop();
+            delay(200);
+            turnRight(turnDuration, 100);
+            distance = sonar.ping_in();
+            counter++;
+            Serial.print("#of turns ");
+            Serial.print(counter);
+             
+        }
+    }
   }
-}
 
 void sonarSerial()
 {

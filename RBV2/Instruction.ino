@@ -1,3 +1,6 @@
+ void instructorCode()
+ {
+
 ////drive forward for one second*********************** First time
 //leftMotorF(100);
 //rightMotorF(100);
@@ -65,16 +68,19 @@
 // turnright(750, 100);
 
 //******************************************************************
-// for (int i = 0; i < 4; i++)  //for a determined number of repetitions, do this:
-//  {
+
+// for (int i = 0; i < 4; i++) { //for a determined number of repetitions, do this:
+// 
 //    forward(1000, 100);
 //    stop();
 //    turnRight(725, 100);
+//    Serial.print ("turn # ");
+//    Serial.println (i);
 //  }
-
+ 
 //******************************************************************
 //Drive in a square
-// sonarTurnRight(8, 100, 750);  
+// sonarTurnRight(8, 100, 750, 3);  
 
 
 //Print distance on the serial monitor for duration (in seconds)
