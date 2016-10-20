@@ -28,15 +28,15 @@ void sonarTurnRight(int bumpDistance, byte speed, int turnDuration, int turns)
       Serial.print(distance);
       Serial.println(" in");
       
-      while (distance < bumpDistance) 
+      while (sonar.ping_in() < bumpDistance) 
           {
             Serial.print("Distance ");
-            Serial.print(distance);
+            Serial.print(sonar.ping_in());
             Serial.println(" in");
             stop();
             delay(200);
             turnRight(turnDuration, 100);
-            distance = sonar.ping_in();
+            //distance = sonar.ping_in();
             counter++;
             Serial.print("#of turns ");
             Serial.print(counter);
