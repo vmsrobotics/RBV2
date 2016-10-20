@@ -1,6 +1,7 @@
 void setup()
 {
   Serial.begin(115200); //Setup serial port for debugging our code
+
   pinMode(2, OUTPUT);//A_EN
   pinMode(3, OUTPUT);//A_RPWM
   pinMode(4, OUTPUT);//A_DIS
