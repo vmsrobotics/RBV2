@@ -1,13 +1,29 @@
 void setup()
 {
   Serial.begin(115200); //Setup serial port for debugging our code
-  studentCode();
+  pinMode(2, OUTPUT);//A_EN
+  pinMode(3, OUTPUT);//A_RPWM
+  pinMode(4, OUTPUT);//A_DIS
+  pinMode(11, OUTPUT);//A_LPWM
+  pinMode(8, OUTPUT);//B_EN
+  pinMode(9, OUTPUT);//B_RPWM
+  pinMode(7, OUTPUT);//B_DIS
+  pinMode(10, OUTPUT);//B_LPWM
+  pinMode(13, OUTPUT);
+  
+  digitalWrite(4, LOW);//A_DIS
+  digitalWrite(7, LOW);//B_DIS
+  digitalWrite(2, HIGH);//A_EN
+  digitalWrite(8, HIGH);//B_EN
+  
 }
 
 void loop()
 {
-
-//
+//wait();
+//studentCode();
+instructorCode();
+wait();
 
 } 
 
@@ -66,15 +82,15 @@ void loop()
   void stop()
   {
     Serial.println ("Stop");
-    digitalWrite(A_EN, LOW);
-    digitalWrite(B_EN, LOW);
+    digitalWrite(A_EN, LOW);  //stop without brake
+    digitalWrite(B_EN, LOW);  //stop without brake
     digitalWrite(A_RPWM, HIGH);
     digitalWrite(A_LPWM, HIGH);
     digitalWrite(B_RPWM, HIGH);
     digitalWrite(B_LPWM, HIGH);
-    delay(100);
-    digitalWrite(A_EN, HIGH);
-    digitalWrite(B_EN, HIGH);
+//    delay(100); //slow down a little with inertia
+//    digitalWrite(A_EN, HIGH); //engage the brakes
+//    digitalWrite(B_EN, HIGH); //engage the brakes
   }
   
   void turnRight(int duration, int speed)   //add gyro code later angle = seconds of turn
@@ -99,14 +115,14 @@ void loop()
   {
     Serial.println ("leftMotorF");
     digitalWrite(A_RPWM, HIGH); //left motor forward
-    analogWrite(A_LPWM, 255-speed);
+    analogWrite(A_LPWM, (255-speed));
   }
   
   void rightMotorF (byte speed)
   {
     Serial.println ("rightMotorF");
     digitalWrite(B_LPWM, HIGH);  //right motor forward
-    analogWrite(B_RPWM, 255-speed);
+    analogWrite(B_RPWM, (255-speed));
   }
   
   void leftMotorR(byte speed)

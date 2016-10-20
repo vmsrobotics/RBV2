@@ -1,6 +1,9 @@
  void instructorCode()
  {
-
+    //forward(3000, 100);
+    //sonarSerial();
+    sonarTurnRight(10, 100, 750, 4);
+    
  }
 ////drive forward for one second*********************** First time
 //leftMotorF(100);
