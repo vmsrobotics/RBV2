@@ -1,15 +1,29 @@
 void setup()
 {
   Serial.begin(115200); //Setup serial port for debugging our code
-  studentCode();
+
+  pinMode(2, OUTPUT);//A_EN
+  pinMode(3, OUTPUT);//A_RPWM
+  pinMode(4, OUTPUT);//A_DIS
+  pinMode(11, OUTPUT);//A_LPWM
+  pinMode(8, OUTPUT);//B_EN
+  pinMode(9, OUTPUT);//B_RPWM
+  pinMode(7, OUTPUT);//B_DIS
+  pinMode(10, OUTPUT);//B_LPWM
+  pinMode(13, OUTPUT);
+  pinMode(22, OUTPUT); // Sets the trigPin as an Output
+  pinMode(23, INPUT); // Sets the echoPin as an Input
+  pinMode(52, INPUT_PULLUP);
+  
+  digitalWrite(4, LOW);//A_DIS
+  digitalWrite(7, LOW);//B_DIS
+  digitalWrite(2, HIGH);//A_EN
+  digitalWrite(8, HIGH);//B_EN
+  
 }
 
-void loop()
-{
 
-//
 
-} 
 
   //  const byte goButton = 52; //this button will execute our functions
 
@@ -22,28 +36,15 @@ void loop()
 // These are the pin connections for the motor controllers, they won't change.
 #if (oldMotorController == false)
 
-  const byte A_EN = 2;    //right wheel
+  const byte A_EN = 2;    //left wheel
   const byte A_RPWM = 3;    //(forward)
   const byte A_DIS = 4;    
   const byte A_LPWM = 11;   //(reverse)
   
-  const byte B_EN = 8;   //left wheel
+  const byte B_EN = 8;   //right wheel
   const byte B_RPWM = 9;   //(forward)
   const byte B_DIS = 7;   
   const byte B_LPWM = 10;  //(reverse)
-  const byte goButton = 52; 
-  
-  #define pinMode(A_EN, OUTPUT);
-  #define pinMode(A_DIS, OUTPUT);
-  #define pinMode(B_EN, OUTPUT);
-  #define pinMode(B_DIS, OUTPUT);
-    /** PWM pin configurate */
-  #define pinMode(A_RPWM, OUTPUT);
-  #define pinMode(A_LPWM, OUTPUT);
-  #define pinMode(B_RPWM, OUTPUT);
-  #define pinMode(B_LPWM, OUTPUT);
-  #define pinMode(goButton, INPUT_PULLUP);
-    
  
   void forward (int duration, byte speed)
   {
@@ -66,15 +67,14 @@ void loop()
   void stop()
   {
     Serial.println ("Stop");
-    digitalWrite(A_EN, LOW);
-    digitalWrite(B_EN, LOW);
+    digitalWrite(A_EN, HIGH); //engage the brakes
+    digitalWrite(B_EN, HIGH); //engage the brakes
     digitalWrite(A_RPWM, HIGH);
     digitalWrite(A_LPWM, HIGH);
     digitalWrite(B_RPWM, HIGH);
     digitalWrite(B_LPWM, HIGH);
-    delay(100);
-    digitalWrite(A_EN, HIGH);
-    digitalWrite(B_EN, HIGH);
+    delay(100); //slow down a little with inertia
+    
   }
   
   void turnRight(int duration, int speed)   //add gyro code later angle = seconds of turn
@@ -99,14 +99,14 @@ void loop()
   {
     Serial.println ("leftMotorF");
     digitalWrite(A_RPWM, HIGH); //left motor forward
-    analogWrite(A_LPWM, 255-speed);
+    analogWrite(A_LPWM, (255-speed));
   }
   
   void rightMotorF (byte speed)
   {
     Serial.println ("rightMotorF");
     digitalWrite(B_LPWM, HIGH);  //right motor forward
-    analogWrite(B_RPWM, 255-speed);
+    analogWrite(B_RPWM, (255-speed));
   }
   
   void leftMotorR(byte speed)
@@ -125,9 +125,10 @@ void loop()
   
  void wait()
   {
-    while  (digitalRead(goButton) == HIGH);
+    while  (digitalRead(52) == LOW);
     {
       stop();
+      delay(100000);
     }
   }
 
@@ -160,12 +161,12 @@ void loop()
 #else  //old motor controller code
 
     //declaring the pins for the IN pins on the L298N
-  const int rightEnablePin = 3;  //Enable A
-  const int rightForwardPin = 4; //IN2
-  const int rightBackwardPin = 2; //IN1
-  const int leftEnablePin = 5;  //Enable B
-  const int leftBackwardPin = 7; //IN4
-  const int leftForwardPin = 8; //IN3
+  const int rightEnablePin = 8;  //Enable A
+  const int rightForwardPin = 9; //IN2
+  const int rightBackwardPin = 10; //IN1
+  const int leftEnablePin = 2;  //Enable B
+  const int leftBackwardPin = 3; //IN4
+  const int leftForwardPin = 11; //IN3
     
   //Stating that the pins are OUTPUT
   pinMode(rightEnablePin, OUTPUT);
