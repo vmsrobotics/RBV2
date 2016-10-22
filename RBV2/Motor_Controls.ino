@@ -161,12 +161,12 @@ void setup()
 #else  //old motor controller code
 
     //declaring the pins for the IN pins on the L298N
-  const int rightEnablePin = 3;  //Enable A
-  const int rightForwardPin = 4; //IN2
-  const int rightBackwardPin = 2; //IN1
-  const int leftEnablePin = 5;  //Enable B
-  const int leftBackwardPin = 7; //IN4
-  const int leftForwardPin = 8; //IN3
+  const int rightEnablePin = 8;  //Enable A
+  const int rightForwardPin = 9; //IN2
+  const int rightBackwardPin = 10; //IN1
+  const int leftEnablePin = 2;  //Enable B
+  const int leftBackwardPin = 3; //IN4
+  const int leftForwardPin = 11; //IN3
     
   //Stating that the pins are OUTPUT
   pinMode(rightEnablePin, OUTPUT);
