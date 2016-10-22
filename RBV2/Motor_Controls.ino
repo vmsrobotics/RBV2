@@ -11,6 +11,9 @@ void setup()
   pinMode(7, OUTPUT);//B_DIS
   pinMode(10, OUTPUT);//B_LPWM
   pinMode(13, OUTPUT);
+  pinMode(22, OUTPUT); // Sets the trigPin as an Output
+  pinMode(23, INPUT); // Sets the echoPin as an Input
+  pinMode(52, INPUT_PULLUP);
   
   digitalWrite(4, LOW);//A_DIS
   digitalWrite(7, LOW);//B_DIS
@@ -19,14 +22,8 @@ void setup()
   
 }
 
-void loop()
-{
-//wait();
-//studentCode();
-instructorCode();
-wait();
 
-} 
+
 
   //  const byte goButton = 52; //this button will execute our functions
 
@@ -39,28 +36,15 @@ wait();
 // These are the pin connections for the motor controllers, they won't change.
 #if (oldMotorController == false)
 
-  const byte A_EN = 2;    //right wheel
+  const byte A_EN = 2;    //left wheel
   const byte A_RPWM = 3;    //(forward)
   const byte A_DIS = 4;    
   const byte A_LPWM = 11;   //(reverse)
   
-  const byte B_EN = 8;   //left wheel
+  const byte B_EN = 8;   //right wheel
   const byte B_RPWM = 9;   //(forward)
   const byte B_DIS = 7;   
   const byte B_LPWM = 10;  //(reverse)
-  const byte goButton = 52; 
-  
-  #define pinMode(A_EN, OUTPUT);
-  #define pinMode(A_DIS, OUTPUT);
-  #define pinMode(B_EN, OUTPUT);
-  #define pinMode(B_DIS, OUTPUT);
-    /** PWM pin configurate */
-  #define pinMode(A_RPWM, OUTPUT);
-  #define pinMode(A_LPWM, OUTPUT);
-  #define pinMode(B_RPWM, OUTPUT);
-  #define pinMode(B_LPWM, OUTPUT);
-  #define pinMode(goButton, INPUT_PULLUP);
-    
  
   void forward (int duration, byte speed)
   {
@@ -83,15 +67,14 @@ wait();
   void stop()
   {
     Serial.println ("Stop");
-    digitalWrite(A_EN, LOW);  //stop without brake
-    digitalWrite(B_EN, LOW);  //stop without brake
+    digitalWrite(A_EN, HIGH); //engage the brakes
+    digitalWrite(B_EN, HIGH); //engage the brakes
     digitalWrite(A_RPWM, HIGH);
     digitalWrite(A_LPWM, HIGH);
     digitalWrite(B_RPWM, HIGH);
     digitalWrite(B_LPWM, HIGH);
-//    delay(100); //slow down a little with inertia
-//    digitalWrite(A_EN, HIGH); //engage the brakes
-//    digitalWrite(B_EN, HIGH); //engage the brakes
+    delay(100); //slow down a little with inertia
+    
   }
   
   void turnRight(int duration, int speed)   //add gyro code later angle = seconds of turn
@@ -142,9 +125,10 @@ wait();
   
  void wait()
   {
-    while  (digitalRead(goButton) == HIGH);
+    while  (digitalRead(52) == LOW);
     {
       stop();
+      delay(100000);
     }
   }
 
