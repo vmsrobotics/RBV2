@@ -3,8 +3,8 @@
 //    Trig to pin 22
 //    Echo to pin 23
 
-const int trigPin = 22;  // Arduino pin tied to trigger pin on the ultrasonic sensor.
-const int echoPin = 23;  // Arduino pin tied to echo pin on the ultrasonic sensor.
+const int trigPin = 5;  // Arduino pin tied to trigger pin on the ultrasonic sensor.
+const int echoPin = 6;  // Arduino pin tied to echo pin on the ultrasonic sensor.
 
 long duration;
 int distance;
@@ -12,33 +12,42 @@ int distance;
 void sonarTurnRight(int bumpDistance, byte speed, int turnDuration, int turns) 
   { 
     int counter = 0;
+    leftMotorF(speed);
+    rightMotorF(speed);
+    delay(500);
+    
     while (counter < turns)
       {
         sonar();
-        leftMotorF(speed);
-        rightMotorF(speed);
-        Serial.println(distance);
-       
+        Serial.print("Sensing....");
+              
         if (distance > bumpDistance)
         {
           
           Serial.print("Forward, distance ");
           Serial.print(distance);
-          Serial.print("; counter = ");
-          Serial.println(counter);
+          Serial.print(";   Remaining turns = ");
+          Serial.println(turns - counter);
         }
   
         else
         {
           stop();
           counter++;
-          Serial.print("Bump ");
+          Serial.print("BUMP AT ");
           Serial.print(distance);
-  //        turnRight(turnDuration, 100);
-          Serial.print("; #of turns ");
-          Serial.println(counter);
+          Serial.print(" inches, ");
+          turnRight(turnDuration, 100);
+          Serial.print(";   Turn # ");
+          Serial.print(counter);
+          Serial.println("complete");
+          delay(500);
+          leftMotorF(speed);
+          rightMotorF(speed);
+          delay(500);
         }
       }
+      stop();
   }
 
 int sonar() 
