@@ -11,8 +11,8 @@ void setup()
   pinMode(7, OUTPUT);//B_DIS
   pinMode(10, OUTPUT);//B_LPWM
   pinMode(13, OUTPUT);
-  pinMode(22, OUTPUT); // Sets the trigPin as an Output
-  pinMode(23, INPUT); // Sets the echoPin as an Input
+  pinMode(5, OUTPUT); // Sets the trigPin as an Output
+  pinMode(6, INPUT); // Sets the echoPin as an Input
   pinMode(52, INPUT_PULLUP);
   
   digitalWrite(4, LOW);//A_DIS
@@ -159,6 +159,7 @@ void setup()
 
 
 #else  //old motor controller code
+speed = speed + 255
 
     //declaring the pins for the IN pins on the L298N
   const int rightEnablePin = 8;  //Enable A
