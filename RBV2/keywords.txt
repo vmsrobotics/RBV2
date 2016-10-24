@@ -9,3 +9,4 @@ leftMotorF	KEYWORD2
 leftMotorR	KEYWORD2
 rightMotorF	KEYWORD2
 rightMotorR	KEYWORD2
+studentCode	KEYWORD3
