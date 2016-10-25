@@ -86,8 +86,8 @@ void setup()
 
 void loop()
 {
- //studentCode();
-instructorCode();
+ studentCode();
+//instructorCode();
 //Serial.println(gyroRead());
-//delay(10000);
+delay(10000);
 } 
