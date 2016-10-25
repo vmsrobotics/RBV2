@@ -1,38 +1,5 @@
-void setup()
-{
-  Serial.begin(115200); //Setup serial port for debugging our code
-
-  pinMode(2, OUTPUT);//A_EN
-  pinMode(3, OUTPUT);//A_RPWM
-  pinMode(4, OUTPUT);//A_DIS
-  pinMode(11, OUTPUT);//A_LPWM
-  pinMode(8, OUTPUT);//B_EN
-  pinMode(9, OUTPUT);//B_RPWM
-  pinMode(7, OUTPUT);//B_DIS
-  pinMode(10, OUTPUT);//B_LPWM
-  pinMode(13, OUTPUT);
-  pinMode(5, OUTPUT); // Sets the trigPin as an Output
-  pinMode(6, INPUT); // Sets the echoPin as an Input
-  pinMode(52, INPUT_PULLUP);
-  
-  digitalWrite(4, LOW);//A_DIS
-  digitalWrite(7, LOW);//B_DIS
-  digitalWrite(2, HIGH);//A_EN
-  digitalWrite(8, HIGH);//B_EN
-  
-}
-
-
-
-
-  //  const byte goButton = 52; //this button will execute our functions
-
-//  const byte goButtonPullUp = 53;
-////
-//  #define pinMode (goButton, INPUT);
-//  #define pinMode (goButtonPullUp, OUTPUT);
-//  #define digitalWrite (goButtonPullUp, HIGH);
-
+bool oldMotorController = true; //set this to true if your robot is using the old-style, L298 dual H-bridge motor controller
+ 
 // These are the pin connections for the motor controllers, they won't change.
 #if (oldMotorController == false)
 

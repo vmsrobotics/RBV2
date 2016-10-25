@@ -9,12 +9,14 @@ const int echoPin = 6;  // Arduino pin tied to echo pin on the ultrasonic sensor
 long duration;
 int distance;
 
-void sonarTurnRight(int bumpDistance, byte speed, int turnDuration, int turns) 
+void sonarTurnRight(int bumpDistance, int turnDuration, byte speed, int turns) 
   { 
     int counter = 0;
     leftMotorF(speed);
     rightMotorF(speed);
+    Serial.println("Initial delay");
     delay(500);
+//    Serial.println("Initial delay complete");
     
     while (counter < turns)
       {
@@ -23,7 +25,6 @@ void sonarTurnRight(int bumpDistance, byte speed, int turnDuration, int turns)
               
         if (distance > bumpDistance)
         {
-          
           Serial.print("Forward, distance ");
           Serial.print(distance);
           Serial.print(";   Remaining turns = ");
