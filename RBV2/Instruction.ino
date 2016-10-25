@@ -1,18 +1,25 @@
  void instructorCode()
  {
-    //forward(3000, 200);
+//    forward(3000, 200);
 //    digitalWrite(13, HIGH);
 //reverse(1000, 100);
 //    sonarSerial();
-    sonarTurnRight(12, 100, 850, 4);
+//    sonarTurnRight(12, 850, 100, 4);
   // turnRight(1000, 150);
-    delay(100000);
+//  leftMotorF(100);
+//  delay(3000);
+//  stop();
+//  delay(2000);
+  
+  for (int x=0; x<1000; x++)
+  {
+    gyroRead();
+  }
+//  Serial.println(gyroRead());
+//  turnAngle("left", 90, 200);
+  delay(100000);
 
     
  }
 
-void loop()
-{
- //studentCode();
-instructorCode();
-} 
+
