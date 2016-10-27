@@ -1,5 +1,5 @@
 #include "I2Cdev.h"
-#include "MPU6050.h"
+//#include "MPU6050.h"
 #include "MPU6050_6Axis_MotionApps20.h"
 #include "Wire.h"
 
@@ -8,6 +8,7 @@
 // AD0 low = 0x68 (default for SparkFun breakout and InvenSense evaluation board)
 // AD0 high = 0x69
 MPU6050 mpu;
+MPU6050 accelgyro; // address = 0x68, the default, on MPU6050 EVB
 //MPU6050 mpu(0x69); // <-- use for AD0 high
 
 /* =========================================================================
@@ -17,7 +18,7 @@ MPU6050 mpu;
    digital I/O pin 2.
  * ========================================================================= */
  
-#define INTERRUPT_PIN 14  // use pin 2 on Arduino Uno & most boards
+#define INTERRUPT_PIN 16  // use pin 2 on Arduino Uno & most boards
 
 // MPU control/status vars
 bool dmpReady = false;  // set true if DMP init was successful
@@ -43,19 +44,17 @@ void dmpDataReady()
     mpuInterrupt = true;
 }
 
-bool gyroCalibrated = false;  //the gyro hasn't been calibrated, we'll do that later
-
-void gyroCalibrate() 
-{
-    //10 second calibration period to settle the Gyro
-    Serial.print("Calibrating Gyroscope");
-    for (int x = 0; x < 20; x++)
-    {
-      Serial.print(".");
-      delay(500);
-    }  
-  
-}
+//void gyroCalibrate() 
+//{
+//    //10 second calibration period to settle the Gyro
+//    Serial.print("Calibrating Gyroscope");
+//    for (int x = 0; x < 10; x++)
+//    {
+//      Serial.print(".");
+//      delay(500);
+//    }  
+//  
+//}
 
 int gyroRead()
 {
@@ -107,7 +106,7 @@ int gyroRead()
         fifoCount -= packetSize;
         }
 
-    // display Euler angles in degrees
+//    // display Euler angles in degrees
     mpu.dmpGetQuaternion(&q, fifoBuffer);
     mpu.dmpGetGravity(&gravity, &q);
     mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
@@ -124,7 +123,7 @@ void turnAngle(String turnDirection, int angle, byte speed)
   bool startUp = true;
   String left[ ] = "left";
   String right[ ] = "right";
-  if (startUp == true)
+  if (startUp == true)// We take 300 readings to let the gyro settle, the first few readings are erratic
   {
     for (int x = 0; x < 300; x++)
     {
@@ -136,7 +135,6 @@ void turnAngle(String turnDirection, int angle, byte speed)
     delay(500);
   }
   
-//  delay(50);  //the first few readings are erratic
   Serial.print("Gyro ");
   Serial.println(gyroRead());
   float gyroBaseReading = gyroRead(); //gyroBaseReading = 140
@@ -158,9 +156,6 @@ void turnAngle(String turnDirection, int angle, byte speed)
       Serial.print("Current Difference ");
       Serial.println(currentDiff);
       float percentRemain = (currentDiff / angle)*100;
-//      float x = speed-50;
-//      float y = x * percentRemain;
-//      float speedFactor = (y / 100)+50;
       float speedFactorFloat = (((speed-50) * percentRemain)/100)+50;  //speedfactor = (speed - 50 * x/angle) + 50; max speed will be user-defined, min speed 50
       int speedFactor = speedFactorFloat;
       Serial.print("Speed Factor ");

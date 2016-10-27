@@ -11,12 +11,13 @@
 //  stop();
 //  delay(2000);
   
-  for (int x=0; x<1000; x++)
-  {
+//  for (int x=0; x<1000; x++)
+//  {
 //    gyroRead();
-  }
+//
+//  }
 //  Serial.println(gyroRead());
-//  turnAngle("left", 90, 200);
+  turnAngle("left", 45, 255);
   delay(100000);
 
     

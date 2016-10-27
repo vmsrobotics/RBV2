@@ -72,7 +72,7 @@ void setup()
       Serial.print(devStatus);
       Serial.println(F(")"));
   }
-gyroCalibrate();    //Settle the gyro with a ten second wait
+//gyroCalibrate();    //Settle the gyro with a ten second wait
   
 }
 
@@ -88,7 +88,7 @@ gyroCalibrate();    //Settle the gyro with a ten second wait
 void loop()
 {
 // studentCode();
-instructorCode();
-//Serial.println(gyroRead());
-delay(10000);
+//instructorCode();
+Serial.println(gyroRead()-360);
+//delay(10000);
 } 
