@@ -18,7 +18,7 @@ MPU6050 accelgyro; // address = 0x68, the default, on MPU6050 EVB
    digital I/O pin 2.
  * ========================================================================= */
  
-#define INTERRUPT_PIN 16  // use pin 2 on Arduino Uno & most boards
+#define INTERRUPT_PIN 14  // use pin 2 on Arduino Uno & most boards
 
 // MPU control/status vars
 bool dmpReady = false;  // set true if DMP init was successful
@@ -44,17 +44,17 @@ void dmpDataReady()
     mpuInterrupt = true;
 }
 
-//void gyroCalibrate() 
-//{
-//    //10 second calibration period to settle the Gyro
-//    Serial.print("Calibrating Gyroscope");
-//    for (int x = 0; x < 10; x++)
-//    {
-//      Serial.print(".");
-//      delay(500);
-//    }  
-//  
-//}
+void gyroCalibrate() 
+{
+    //10 second calibration period to settle the Gyro
+    Serial.print("Calibrating Gyroscope");
+    for (int x = 0; x < 10; x++)
+    {
+      Serial.print(".");
+      delay(500);
+    }  
+  
+}
 
 int gyroRead()
 {
@@ -112,7 +112,7 @@ int gyroRead()
     mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
 //    Serial.print("yaw ");
 //    Serial.println(ypr[0] * 180/M_PI);
-  int gyro = ypr[0] * 180/M_PI + 360; //yaw; the additional 180 brings the numbers to 0-360, which keeps the numbers positive when subtracting angles on left turns
+  int gyro = (ypr[0] + 180) * 180/M_PI ; //yaw; the additional 180 brings the numbers to 0-360, which keeps the numbers positive when subtracting angles on left turns
   return gyro;
 }
 
@@ -123,18 +123,7 @@ void turnAngle(String turnDirection, int angle, byte speed)
   bool startUp = true;
   String left[ ] = "left";
   String right[ ] = "right";
-  if (startUp == true)// We take 300 readings to let the gyro settle, the first few readings are erratic
-  {
-    for (int x = 0; x < 300; x++)
-    {
-      Serial.print("Gyro Start Up ");
-  Serial.println(gyroRead());
-    }
-    startUp = false;
-    Serial.print("Gyro Start Up Complete");
-    delay(500);
-  }
-  
+  gyroRead();
   Serial.print("Gyro ");
   Serial.println(gyroRead());
   float gyroBaseReading = gyroRead(); //gyroBaseReading = 140
@@ -156,7 +145,7 @@ void turnAngle(String turnDirection, int angle, byte speed)
       Serial.print("Current Difference ");
       Serial.println(currentDiff);
       float percentRemain = (currentDiff / angle)*100;
-      float speedFactorFloat = (((speed-50) * percentRemain)/100)+50;  //speedfactor = (speed - 50 * x/angle) + 50; max speed will be user-defined, min speed 50
+      float speedFactorFloat = (((speed-75) * percentRemain)/100)+75;  //speedfactor = (speed - 50 * x/angle) + 50; max speed will be user-defined, min speed 50
       int speedFactor = speedFactorFloat;
       Serial.print("Speed Factor ");
       Serial.println(speedFactor);
@@ -164,7 +153,7 @@ void turnAngle(String turnDirection, int angle, byte speed)
       rightMotorF(speedFactor);
     }
     stop();
-    delay(20000);
+//    delay(20000);
   }
 
   //if the angle is greater than zero (right turn)

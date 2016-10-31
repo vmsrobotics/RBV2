@@ -36,11 +36,11 @@ void setup()
 
   devStatus = mpu.dmpInitialize();
 
-//    // supply your own gyro offsets here, scaled for min sensitivity
-//    mpu.setXGyroOffset(220);
-//    mpu.setYGyroOffset(76);
-//    mpu.setZGyroOffset(-85);
-//    mpu.setZAccelOffset(1788); // 1688 factory default for my test chip
+    // supply your own gyro offsets here, scaled for min sensitivity
+    mpu.setXGyroOffset(220);
+    mpu.setYGyroOffset(76);
+    mpu.setZGyroOffset(-85);
+    mpu.setZAccelOffset(1788); // 1688 factory default for my test chip
 
   // make sure it worked (returns 0 if so)
   
@@ -88,7 +88,7 @@ void setup()
 void loop()
 {
 // studentCode();
-//instructorCode();
-Serial.println(gyroRead()-360);
+instructorCode();
+//Serial.println(gyroRead());
 //delay(10000);
 } 

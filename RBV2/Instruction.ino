@@ -1,11 +1,21 @@
  void instructorCode()
  {
-//    forward(3000, 200);
+//    forward(1000, 150);
 //    digitalWrite(13, HIGH);
 //reverse(1000, 100);
 //    sonarSerial();
 //    sonarTurnRight(12, 850, 100, 4);
-  // turnRight(1000, 150);
+gyroRead();
+delay(1000);
+sonarForwardAvoid(12, 150);
+turnAngle("left", 90, 150);
+sonarForwardAvoid(12, 150);
+turnAngle("left", 90, 150);
+sonarForwardAvoid(12, 150);
+turnAngle("left", 90, 150);
+sonarForwardAvoid(12, 150);
+turnAngle("left", 90, 150);
+//   turnRight(1000, 150);
 //  leftMotorF(100);
 //  delay(3000);
 //  stop();
@@ -17,8 +27,10 @@
 //
 //  }
 //  Serial.println(gyroRead());
-  turnAngle("left", 45, 255);
-  delay(100000);
+//  turnAngle("left", 90, 150);
+//  forward(1000, 150);
+//  turnAngle("left", 180, 150);
+  delay(1000000);
 
     
  }

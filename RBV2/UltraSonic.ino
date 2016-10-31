@@ -86,4 +86,29 @@ void sonarSerial()
       }
 }
 
-
+void sonarForwardAvoid(int bumpDistance, byte speed) 
+  { 
+    leftMotorF(speed);
+    rightMotorF(speed);
+    Serial.println("Initial delay");
+    delay(500);
+//    Serial.println("Initial delay complete");
+    
+    while (distance > bumpDistance)
+      {
+        sonar();
+        Serial.print("Sensing....");
+              
+        if (distance > bumpDistance)
+        {
+          Serial.print("Forward, distance ");
+          Serial.println(distance);
+        }
+        else
+        {
+          Serial.print("Stop at distance ");
+          Serial.println(distance);
+          stop();
+        }
+      }
+  }
