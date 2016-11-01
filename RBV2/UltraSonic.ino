@@ -87,7 +87,7 @@ void sonarSerial()
 }
 
 void sonarForwardAvoid(int bumpDistance, byte speed) 
-  { 
+  {
     leftMotorF(speed);
     rightMotorF(speed);
     Serial.println("Initial delay");

@@ -1,11 +1,11 @@
- void instructorCode()
+void instructorCode()
  {
+  
 //    forward(1000, 150);
 //    digitalWrite(13, HIGH);
 //reverse(1000, 100);
 //    sonarSerial();
 //    sonarTurnRight(12, 850, 100, 4);
-gyroRead();
 delay(1000);
 sonarForwardAvoid(12, 150);
 turnAngle("left", 90, 150);

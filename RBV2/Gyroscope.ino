@@ -37,12 +37,19 @@ VectorFloat gravity;    // [x, y, z]            gravity vector
 float euler[3];         // [psi, theta, phi]    Euler angle container
 float ypr[3];           // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
 
+// ================================================================
+// ===               INTERRUPT DETECTION ROUTINE                ===
+// ================================================================
+
 volatile bool mpuInterrupt = false;     // indicates whether MPU interrupt pin has gone high
 
 void dmpDataReady() 
 {
     mpuInterrupt = true;
 }
+//
+
+int gyro; //this is the name of yaw value from the gyroscope.  It increases with right turns, and decreases with left turns.
 
 void gyroCalibrate() 
 {
@@ -53,80 +60,15 @@ void gyroCalibrate()
       Serial.print(".");
       delay(500);
     }  
-  
-}
-
-int gyroRead()
-{
-// if programming failed, don't try to do anything
-//    if (!dmpReady) return;
-
-// wait for MPU interrupt or extra packet(s) available
-    while (!mpuInterrupt && fifoCount < packetSize) 
-      {
-        // other program behavior stuff here
-        // .
-        // .
-        // .
-        // if you are really paranoid you can frequently test in between other
-        // stuff to see if mpuInterrupt is true, and if so, "break;" from the
-        // while() loop to immediately process the MPU data
-        // .
-        // .
-        // .
-      }
-
-    // reset interrupt flag and get INT_STATUS byte
-    mpuInterrupt = false;
-    mpuIntStatus = mpu.getIntStatus();
-
-    // get current FIFO count
-    fifoCount = mpu.getFIFOCount();
-
-    // check for overflow (this should never happen unless our code is too inefficient)
-    if ((mpuIntStatus & 0x10) || fifoCount == 1024) 
-      {
-        // reset so we can continue cleanly
-        mpu.resetFIFO();
-        Serial.println(F("FIFO overflow!"));
-
-        // otherwise, check for DMP data ready interrupt (this should happen frequently)
-      } 
-      
-      else if (mpuIntStatus & 0x02) 
-        {
-        // wait for correct available data length, should be a VERY short wait
-        while (fifoCount < packetSize) fifoCount = mpu.getFIFOCount();
-
-        // read a packet from FIFO
-        mpu.getFIFOBytes(fifoBuffer, packetSize);
-        
-        // track FIFO count here in case there is > 1 packet available
-        // (this lets us immediately read more without waiting for an interrupt)
-        fifoCount -= packetSize;
-        }
-
-//    // display Euler angles in degrees
-    mpu.dmpGetQuaternion(&q, fifoBuffer);
-    mpu.dmpGetGravity(&gravity, &q);
-    mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
-//    Serial.print("yaw ");
-//    Serial.println(ypr[0] * 180/M_PI);
-  int gyro = (ypr[0] + 180) * 180/M_PI ; //yaw; the additional 180 brings the numbers to 0-360, which keeps the numbers positive when subtracting angles on left turns
-  return gyro;
-}
-
-int gyro;
+ }
 
 void turnAngle(String turnDirection, int angle, byte speed)
 {
-  bool startUp = true;
   String left[ ] = "left";
   String right[ ] = "right";
-  gyroRead();
   Serial.print("Gyro ");
-  Serial.println(gyroRead());
-  float gyroBaseReading = gyroRead(); //gyroBaseReading = 140
+  Serial.println(gyro);
+  float gyroBaseReading = gyro; //gyroBaseReading = 140
   float stopAngle = (gyroBaseReading - angle);  //stopAngle = abs(140-90) = 50
   Serial.print(" Base Reading ");
   Serial.print(gyroBaseReading); //140
@@ -136,12 +78,11 @@ void turnAngle(String turnDirection, int angle, byte speed)
   if (turnDirection == "left")
   {
     Serial.print("Left Turn Initiated");
-    float currentDiff = (gyroRead() - stopAngle); // currentDiff = abs(140-50) = 90
+    float currentDiff = (gyro - stopAngle); // currentDiff = abs(140-50) = 90
         
     while (currentDiff > 0)
     {
-      gyroRead();
-      currentDiff = (gyroRead() - stopAngle);
+      currentDiff = (gyro - stopAngle);
       Serial.print("Current Difference ");
       Serial.println(currentDiff);
       float percentRemain = (currentDiff / angle)*100;
