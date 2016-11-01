@@ -64,16 +64,16 @@ void colorRead()
   digitalWrite(S3,LOW);//setting for RED color sensor
   frequency = pulseIn(Output, LOW);//reading frequency
   Serial.print(frequency);//printing RED color frequency
-  Serial.println("  ");
+  Serial.print("  ");
   delay(50);
  
-//  Serial.print("B=");// printing name
-//  digitalWrite(S2,LOW);
-//  digitalWrite(S3,HIGH);// setting for BLUE color sensor
-//  frequency = pulseIn(Output, LOW);// reading frequency
-//  Serial.print(frequency);// printing BLUE color frequency
-//  Serial.print("  ");
-//  delay(250);
+  Serial.print("B=");// printing name
+  digitalWrite(S2,LOW);
+  digitalWrite(S3,HIGH);// setting for BLUE color sensor
+  frequency = pulseIn(Output, LOW);// reading frequency
+  Serial.print(frequency);// printing BLUE color frequency
+  Serial.println("  ");
+  delay(250);
 // 
 //  Serial.print("G=");// printing name
 //  digitalWrite(S2,HIGH);
