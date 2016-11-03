@@ -8,7 +8,7 @@
 // AD0 low = 0x68 (default for SparkFun breakout and InvenSense evaluation board)
 // AD0 high = 0x69
 MPU6050 mpu;
-MPU6050 accelgyro; // address = 0x68, the default, on MPU6050 EVB
+//MPU6050 accelgyro; // address = 0x68, the default, on MPU6050 EVB
 //MPU6050 mpu(0x69); // <-- use for AD0 high
 
 /* =========================================================================
@@ -18,7 +18,7 @@ MPU6050 accelgyro; // address = 0x68, the default, on MPU6050 EVB
    digital I/O pin 2.
  * ========================================================================= */
  
-#define INTERRUPT_PIN 14  // use pin 2 on Arduino Uno & most boards
+#define INTERRUPT_PIN 2  // use pin 2 on Arduino Uno & most boards
 
 // MPU control/status vars
 bool dmpReady = false;  // set true if DMP init was successful

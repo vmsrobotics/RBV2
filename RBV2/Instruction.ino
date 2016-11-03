@@ -6,15 +6,15 @@ void instructorCode()
 //reverse(1000, 100);
 //    sonarSerial();
 //    sonarTurnRight(12, 850, 100, 4);
-delay(1000);
-sonarForwardAvoid(12, 150);
-turnAngle("left", 90, 150);
-sonarForwardAvoid(12, 150);
-turnAngle("left", 90, 150);
-sonarForwardAvoid(12, 150);
-turnAngle("left", 90, 150);
-sonarForwardAvoid(12, 150);
-turnAngle("left", 90, 150);
+//delay(1000);
+//sonarForwardAvoid(12, 150);
+//turnAngle("left", 90, 150);
+//sonarForwardAvoid(12, 150);
+//turnAngle("left", 90, 150);
+//sonarForwardAvoid(12, 150);
+//turnAngle("left", 90, 150);
+//sonarForwardAvoid(12, 150);
+//turnAngle("left", 90, 150);
 //   turnRight(1000, 150);
 //  leftMotorF(100);
 //  delay(3000);
@@ -28,9 +28,9 @@ turnAngle("left", 90, 150);
 //  }
 //  Serial.println(gyroRead());
 //  turnAngle("left", 90, 150);
-//  forward(1000, 150);
+  forward(1000, 150);
 //  turnAngle("left", 180, 150);
-  delay(1000000);
+//  delay(1000000);
 
     
  }
