@@ -4,10 +4,36 @@ bool oldMotorController = true; //set this to true if your robot is using the ol
 
 void studentCode()
 {
-  //lots of room here...
 
-//sonarTurnRight(12, 850, 100, 4);
 
+// Drive Straight until obstacle is reached
+
+
+//Turn right
+
+
+// Drive Straight until obstacle is reached
+
+
+//Turn left
+
+
+// Drive Straight until obstacle is reached
+
+
+//Turn right
+
+
+// Drive Straight until obstacle is reached
+
+
+//Turn Right
+
+
+// Drive Straight until obstacle is reached where you will need to be close enough to read color
+
+
+//Read color at obstacle, turn accordingly
 colorRead();
 
 

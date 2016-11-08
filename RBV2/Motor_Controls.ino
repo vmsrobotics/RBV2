@@ -10,6 +10,7 @@
   const byte B_RPWM = 9;   //(forward)
   const byte B_DIS = 7;   
   const byte B_LPWM = 10;  //(reverse)
+  
   byte speed = constrain(speed, 50, 200);
  
   void forward (int duration, byte speed)
