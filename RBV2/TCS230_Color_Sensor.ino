@@ -57,7 +57,7 @@ const byte S2 = 17;
 const byte S3 = 18;
 const byte Output = 19;
 
-void colorRead()
+int colorReadRed()
   {
   Serial.print("R=");//printing name
   digitalWrite(S2,LOW);
@@ -66,14 +66,8 @@ void colorRead()
   Serial.print(frequency);//printing RED color frequency
   Serial.print("  ");
   delay(50);
- 
-  Serial.print("B=");// printing name
-  digitalWrite(S2,LOW);
-  digitalWrite(S3,HIGH);// setting for BLUE color sensor
-  frequency = pulseIn(Output, LOW);// reading frequency
-  Serial.print(frequency);// printing BLUE color frequency
-  Serial.println("  ");
-  delay(250);
+  return frequency;
+  
 // 
 //  Serial.print("G=");// printing name
 //  digitalWrite(S2,HIGH);
@@ -83,4 +77,24 @@ void colorRead()
 //  Serial.println("    ");
 //  delay(250);        
 }         
- 
+
+ int colorReadBlue()
+  {
+  
+  Serial.print("B=");// printing name
+  digitalWrite(S2,LOW);
+  digitalWrite(S3,HIGH);// setting for BLUE color sensor
+  frequency = pulseIn(Output, LOW);// reading frequency
+  Serial.print(frequency);// printing BLUE color frequency
+  Serial.println("  ");
+  delay(250);
+  return frequency;
+// 
+//  Serial.print("G=");// printing name
+//  digitalWrite(S2,HIGH);
+//  digitalWrite(S3,HIGH);// setting for GREEN color sensor
+//  frequency = pulseIn(Output, LOW);// reading frequency
+//  Serial.print(frequency);// printing GREEN color frequency
+//  Serial.println("    ");
+//  delay(250);        
+}         
