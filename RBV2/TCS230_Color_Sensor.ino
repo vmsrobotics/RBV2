@@ -56,10 +56,8 @@ const byte S1 = 26;
 const byte S2 = 17;
 const byte S3 = 18;
 const byte Output = 19;
-int red;
-int blue;
 
-int colorRead()
+void colorRead()
   {
   Serial.print("R=");//printing name
   digitalWrite(S2,LOW);
@@ -68,7 +66,6 @@ int colorRead()
   Serial.print(frequency);//printing RED color frequency
   Serial.print("  ");
   delay(50);
-   red = frequency;
  
   Serial.print("B=");// printing name
   digitalWrite(S2,LOW);
@@ -77,7 +74,6 @@ int colorRead()
   Serial.print(frequency);// printing BLUE color frequency
   Serial.println("  ");
   delay(250);
-   blue = frequency; 
 // 
 //  Serial.print("G=");// printing name
 //  digitalWrite(S2,HIGH);
