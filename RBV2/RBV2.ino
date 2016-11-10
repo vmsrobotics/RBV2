@@ -34,8 +34,11 @@ void studentCode()
 
 
 //Read color at obstacle, turn accordingly
-colorRead();
 
+//    Serial.print("red =  ");
+//    Serial.print(red);
+//    Serial.print("blue =  ");
+//    Serial.print(red);
 
 
 

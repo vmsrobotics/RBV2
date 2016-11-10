@@ -12,12 +12,13 @@ double compAngleX, compAngleY; //These are the angles in the complementary filte
 
 bool blinkState = false;
 
-  
+    
 void setup()
 {
   Serial.begin(115200); //Setup serial port for debugging our code
 
 //########################## Pins for Motors ############################
+
   pinMode(2, OUTPUT);//A_EN
   pinMode(3, OUTPUT);//A_RPWM
   pinMode(4, OUTPUT);//A_DIS
@@ -42,13 +43,13 @@ void setup()
   pinMode(52, INPUT_PULLUP);
 
   //##################### Pins for Color Sensor ##########################
-  
+
   pinMode(25, OUTPUT);  //S0
   pinMode(26, OUTPUT);  //S1
   pinMode(17, OUTPUT);  //S2
   pinMode(18, OUTPUT);  //S3
   pinMode(19, INPUT);   //Out
-
+  
   digitalWrite(25, HIGH); //S0 HIGH, S1 LOW = 20% output frequency scaling
   digitalWrite(26, LOW);  //S1
 
@@ -166,8 +167,8 @@ void setup()
 void loop() 
 {
 
-//    instructorCode();
-    studentCode();
+    instructorCode();
+//    studentCode();
     delay(200000);  //stop the loop for a while (200 seconds)
 }
 

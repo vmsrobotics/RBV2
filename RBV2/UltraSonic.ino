@@ -6,11 +6,42 @@
 const int trigPin = 5;  // Arduino pin tied to trigger pin on the ultrasonic sensor.
 const int echoPin = 6;  // Arduino pin tied to echo pin on the ultrasonic sensor.
 
-long duration;
 int distance;
+
+int sonar() 
+{
+  long duration;
+  int reading;
+  
+  for (int x=0; x < 2; x++)
+  {
+    int oldReading = reading;
+    digitalWrite(trigPin, LOW);  // Clears the trigPin
+    delayMicroseconds(2);
+    digitalWrite(trigPin, HIGH);  // Sets the trigPin on HIGH state for 10 micro seconds
+    delayMicroseconds(10);
+    digitalWrite(trigPin, LOW);
+    duration = pulseIn(echoPin, HIGH);  // Reads the echoPin, returns the sound wave travel time in microseconds
+    reading= duration * 0.0067;  // Calculating the distance in inches
+    delay(25);
+    if (reading != 0) 
+      { 
+        (reading += oldReading) / 2; //averaging to smooth values
+      }
+    else
+      {
+        reading = oldReading;
+      }
+  }
+  distance = reading;
+  return distance;
+}//end int sonar()
+  
 
 void sonarTurnRight(int bumpDistance, int turnDuration, byte speed, int turns) 
   { 
+    if (sonar())
+    {
     Serial.println("Sonar Turn Right Initiated, Drive Forward, wait for bump");
     int counter = 0;
     leftMotorF(speed);
@@ -50,31 +81,15 @@ void sonarTurnRight(int bumpDistance, int turnDuration, byte speed, int turns)
         }
       }
       stop();
-  }
-
-int sonar() 
-{
-  int oldDistance = distance;
-  digitalWrite(trigPin, LOW);  // Clears the trigPin
-  delayMicroseconds(2);
-  digitalWrite(trigPin, HIGH);  // Sets the trigPin on HIGH state for 10 micro seconds
-  delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
-  duration = pulseIn(echoPin, HIGH);  // Reads the echoPin, returns the sound wave travel time in microseconds
-  distance= duration * 0.0067;  // Calculating the distance in inches
-  delay(50);
-  if (distance != 0) 
-    { 
-      (distance += oldDistance) / 2; //averaging to smooth values
-      return distance;
-    }
-  else
+    }//end (if sonar())
+    
+    else
     {
-      distance = oldDistance;
-      return distance;
+      Serial.println("No Sonar Response");
     }
-}
-  
+  }//end sonarTurnRight
+
+
 void sonarSerial()
 {
     int counter = 0;
@@ -85,10 +100,12 @@ void sonarSerial()
       counter++;
       delay(50);
       }
-}
+}//end sonarSerial
 
 void sonarForwardAvoid(int bumpDistance, byte speed) 
   {
+    if (sonar())
+    {
     Serial.print("Sonar Forward Avoid Initiated, Drive Forward, stop at distance of ");
     Serial.println(bumpDistance);
     leftMotorF(speed);
@@ -112,4 +129,9 @@ void sonarForwardAvoid(int bumpDistance, byte speed)
           stop();
         }
       }
-  }
+    }//end if (sonar())
+    else
+    {
+      Serial.println("No Sonar Response");
+    }
+  }//end sonarForwardAvoid

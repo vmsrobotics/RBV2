@@ -28,11 +28,24 @@ void instructorCode()
 //  }
 //  Serial.println(gyroRead());
 //  turnAngle("left", 90, 150);
-  forward(1000, 150);
+//  forward(1000, 150);
 //  turnAngle("left", 180, 150);
 //  delay(1000000);
 
+if (red() < blue())
+{
+  Serial.println("Predominantly red");
+}
+
+else
+{
+  Serial.print("Predominantly blue");
+}
     
+    Serial.print("red =  ");
+    Serial.print(red());
+    Serial.print("blue =  ");
+    Serial.print(blue());
  }
 
 
