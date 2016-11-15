@@ -1,6 +1,8 @@
 void loop() 
 {
 
+//    instructorCode();
+    studentCode();
     delay(200000);  //stop the loop for a while (200 seconds)
 }
 
