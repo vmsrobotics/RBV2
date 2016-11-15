@@ -7,7 +7,7 @@ void instructorCode()
 //    sonarSerial();
 //    sonarTurnRight(12, 850, 100, 4);
 //delay(1000);
-//sonarForwardAvoid(12, 150);
+sonarForwardAvoid(12, 150);
 //turnAngle("left", 90, 150);
 //sonarForwardAvoid(12, 150);
 //turnAngle("left", 90, 150);
@@ -32,20 +32,20 @@ void instructorCode()
 //  turnAngle("left", 180, 150);
 //  delay(1000000);
 
-if (red() < blue())
-{
-  Serial.println("Predominantly red");
-}
-
-else
-{
-  Serial.print("Predominantly blue");
-}
-    
-    Serial.print("red =  ");
-    Serial.print(red());
-    Serial.print("blue =  ");
-    Serial.print(blue());
+//if (red() < blue())
+//{
+//  Serial.println("Predominantly red");
+//}
+//
+//else
+//{
+//  Serial.print("Predominantly blue");
+//}
+//    
+//    Serial.print("red =  ");
+//    Serial.print(red());
+//    Serial.print("blue =  ");
+//    Serial.print(blue());
  }
 
 
