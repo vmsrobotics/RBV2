@@ -690,53 +690,15 @@ uint8_t MPU6050::dmpGetEuler(float *data, Quaternion *q) {
     data[2] = atan2(2*q -> y*q -> z - 2*q -> w*q -> x, 2*q -> w*q -> w + 2*q -> z*q -> z - 1);   // phi
     return 0;
 }
-
-//commented out per http://forum.arduino.cc/index.php?topic=331084.0
-
-//uint8_t MPU6050::dmpGetYawPitchRoll(float *data, Quaternion *q, VectorFloat *gravity) {
-//    // yaw: (about Z axis)
-//    data[0] = atan2(2*q -> x*q -> y - 2*q -> w*q -> z, 2*q -> w*q -> w + 2*q -> x*q -> x - 1);
-//    // pitch: (nose up/down, about Y axis)
-//    data[1] = atan(gravity -> x / sqrt(gravity -> y*gravity -> y + gravity -> z*gravity -> z));
-//    // roll: (tilt left/right, about X axis)
-//    data[2] = atan(gravity -> y / sqrt(gravity -> x*gravity -> x + gravity -> z*gravity -> z));
-//    return 0;
-//}
-
-//added per http://forum.arduino.cc/index.php?topic=331084.0
 uint8_t MPU6050::dmpGetYawPitchRoll(float *data, Quaternion *q, VectorFloat *gravity) {
     // yaw: (about Z axis)
     data[0] = atan2(2*q -> x*q -> y - 2*q -> w*q -> z, 2*q -> w*q -> w + 2*q -> x*q -> x - 1);
-    
     // pitch: (nose up/down, about Y axis)
-    float temp = atan(gravity->z / gravity->x);
-    if(gravity->z < 0){
-      if(gravity->x >= 0)
-        data[1] = HALF_PI - temp; //quadrant 2
-      else
-        data[1] = TWO_PI - HALF_PI - temp; //quadrant 3
-    }
-    else if(gravity->x >= 0)
-      data[1] = HALF_PI - temp; //quadrant 1
-    else
-      data[1] = TWO_PI - HALF_PI - temp; //quadrant 4
-    
+    data[1] = atan(gravity -> x / sqrt(gravity -> y*gravity -> y + gravity -> z*gravity -> z));
     // roll: (tilt left/right, about X axis)
-    temp = atan(gravity->z / gravity->y);
-    if(gravity->y < 0){
-      if(gravity->z >= 0)
-        data[2] = HALF_PI + temp; //quadrant 1
-      else
-        data[2] = HALF_PI + temp; //quadrant 2
-    }
-    else if(gravity->z >= 0)
-      data[2] = TWO_PI - HALF_PI + temp; //quadrant 4
-    else
-      data[2] = TWO_PI - HALF_PI + temp; //quadrant 3
-    
+    data[2] = atan(gravity -> y / sqrt(gravity -> x*gravity -> x + gravity -> z*gravity -> z));
     return 0;
 }
-
 
 // uint8_t MPU6050::dmpGetAccelFloat(float *data, const uint8_t* packet);
 // uint8_t MPU6050::dmpGetQuaternionFloat(float *data, const uint8_t* packet);
