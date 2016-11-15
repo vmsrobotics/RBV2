@@ -126,7 +126,8 @@
 
 
 #else  //old motor controller code
-speed = speed + 255
+byte speed = constrain(speed, 50, 200);
+
 
     //declaring the pins for the IN pins on the L298N
   const int rightEnablePin = 8;  //Enable A
@@ -151,6 +152,38 @@ speed = speed + 255
 //      stop();
 //    }
 //  }
+  void rightMotorF(byte speed)
+  {
+    Serial.println ("rightMotorF");
+    digitalWrite(rightForwardPin, HIGH);
+    digitalWrite(rightBackwardPin, LOW);
+    analogWrite(rightEnablePin, speed); 
+  }
+  
+  void leftMotorF (byte speed)
+  {
+    Serial.println ("leftMotorF");
+    
+    digitalWrite(leftForwardPin, HIGH);
+    digitalWrite(leftBackwardPin, LOW);
+    analogWrite(leftEnablePin, speed);
+  }
+  
+  void leftMotorR(byte speed)
+  {
+    Serial.println ("leftMotorR");
+    digitalWrite(leftForwardPin, LOW);
+    digitalWrite(leftBackwardPin, HIGH);
+    analogWrite(leftEnablePin, speed);
+  }
+  
+  void rightMotorR(byte speed)
+  {
+    Serial.println ("rightMotorR");
+    digitalWrite(rightForwardPin, LOW);
+    digitalWrite(rightBackwardPin, HIGH);
+    analogWrite(rightEnablePin, speed); 
+  }
   
   void forward(int duration, byte speed){
     Serial.println("Drive Forward");

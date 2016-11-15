@@ -15,16 +15,20 @@ void gyro() {
   
   double dt = (double)(micros() - timer) / 1000000; //This line does three things: 1) stops the timer, 2)converts the timer's output to seconds from microseconds, 3)casts the value as a double saved to "dt".
   timer = micros(); //start the timer again so that we can calculate the next dt.
+  
 
   //the next two lines calculate the orientation of the accelerometer relative to the earth and convert the output of atan2 from radians to degrees
   //We will use this data to correct any cumulative errors in the orientation that the gyroscope develops.
   double roll = atan2(AcY, AcZ)*degconvert;
   double pitch = atan2(-AcX, AcZ)*degconvert;
-
+  Serial.print((int)roll);Serial.print(" \t");
+  Serial.print((int)pitch);Serial.println("\n");
+  
   //The gyroscope outputs angular velocities.  To convert these velocities from the raw data to deg/second, divide by 131.  
   //Notice, we're dividing by a double "131.0" instead of the int 131.
   double gyroXrate = GyX/131.0;
   double gyroYrate = GyY/131.0;
+  
 
   //THE COMPLEMENTARY FILTER
   //This filter calculates the angle based MOSTLY on integrating the angular velocity to an angular displacement.
@@ -36,7 +40,21 @@ void gyro() {
   compAngleY = 0.99 * (compAngleY + gyroYrate * dt) + 0.01 * pitch; 
   
   //Print the results
-  Serial.print(compAngleX);Serial.print("\t");
-  Serial.print(compAngleY);Serial.print("\n");
-
+//  Serial.print(compAngleX);Serial.print(" \t");
+//  Serial.print(compAngleY);Serial.println("\n");
+//  Serial.print(gyroXrate);Serial.println("\t");
+//  Serial.print(gyroXrate);Serial.println("\n");
+//  return compAngleX;
 }
+
+void turnDegrees (int angle, byte speed)
+{
+  //calulate degrees/second
+  gyro();
+
+
+
+
+  
+}
+

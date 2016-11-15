@@ -43,7 +43,9 @@
 // * 24
 // * 52 Wait button (internal pullup)
 // * 53 
-// * 58  Left Motor Encoder (yellow)
-// * 59  Left Motor Encoder (white)
+// * 56 (A2) Right Motor Encoder (red)
+// * 57 (A3) Right Motor Encoder (black)
+// * 58 (A4) Left Motor Encoder (red)
+// * 59 (A5) Left Motor Encoder (black)
 
 

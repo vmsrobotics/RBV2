@@ -1,3 +1,14 @@
+//################################# LOOP ################################
+
+void loop() 
+{
+
+    instructorCode();
+//    studentCode();
+//    delay(200000);  //stop the loop for a while (200 seconds)
+}
+
+
 //#################### Global Variables for Gyro #######################
 #include "Wire.h"
 #define degconvert 57.2957786 //there are approx 57 degrees in a radian.
@@ -61,7 +72,7 @@ void setup()
   
   // Set up MPU 6050:
   Wire.begin();
-  Wire.setClock(400000UL); // Set I2C frequency to 400kHz
+  Wire.setClock(400000); // Set I2C frequency to 400kHz
     
   Wire.beginTransmission(MPU_addr);
   Wire.write(0x6B);  // PWR_MGMT_1 register
@@ -164,13 +175,6 @@ void setup()
 }
 
 
-void loop() 
-{
-
-    instructorCode();
-//    studentCode();
-    delay(200000);  //stop the loop for a while (200 seconds)
-}
 
 //    static int    SubLoop, Demand;
 //    static byte   Moving, CMDBuff[256], CurrentCMD;
