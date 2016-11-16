@@ -83,7 +83,7 @@ void sonarTurnRight(int bumpDistance, int turnDuration, byte speed, int turns)
     
     else
     {
-      Serial.println("No Sonar Response " + distance);
+      Serial.println("No Sonar Response " + String(distance));
     }
   }//end sonarTurnRight
 
@@ -109,28 +109,23 @@ void sonarForwardAvoid(int bumpDistance, byte speed)
     Serial.println(bumpDistance);
     leftMotorF(speed);
     rightMotorF(speed);
-    Serial.println("Initial delay");
-    delay(50);
-//    Serial.println("Initial delay complete");
     
-    while (distance > bumpDistance)
-      {
-        distance = sonar();
-        if (distance > bumpDistance)
+      while (distance > bumpDistance)
         {
-          Serial.print("Running Sonar Forward Avoid, distance not reached, distance detected ");
-          Serial.println(distance);
+            Serial.print("Running Sonar Forward Avoid, distance not reached, distance detected ");
+            Serial.println(distance);
+            distance = sonar();
         }
-        else
-        {
-          Serial.print("Stopped at distance ");
-          Serial.println(distance);
-          stop();
-        }
-      }
-    }//end if (sonar())
+        
+            stop();
+            Serial.print("Stopped at distance ");
+            Serial.println(distance);
+          
+    }//end if (distance > 2)
+    
     else
     {
-      Serial.println("No Sonar Response " + distance);
+      Serial.println("No Sonar Response " + String(distance));
+      
     }
   }//end sonarForwardAvoid
