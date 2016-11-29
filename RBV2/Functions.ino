@@ -8,6 +8,7 @@
 // * sonarTurnRight (distance, duration of turn, speed, number of turns) drive forward until the bot reaches distance (inches) 
 // *  from obstacle, turn right for duration, repeat for indicated number of turns
 // * sonarForwardAvoid(bumpDistance, speed) drive forward at a particular speed and stop a particular distance (inches) from obstacle 
+// * forwardColorChange(speed, factor) drive forward at a particular speed until a significant color (factor) change is sensed
 //
 // *************The following functions should be used for testing and debugging **********************************************
 // * leftMotorF(speed); drive the left motor forward at speed (50-200); you'll have to implement a stop() function

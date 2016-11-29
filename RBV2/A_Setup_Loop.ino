@@ -1,3 +1,11 @@
+void loop() 
+{
+
+//    instructorCode();
+    studentCode();
+    delay(200000);  //stop the loop for a while (200 seconds)
+}
+
 //#################### Global Variables for Gyro #######################
 #include "Wire.h"
 #define degconvert 57.2957786 //there are approx 57 degrees in a radian.
@@ -164,13 +172,7 @@ void setup()
 }
 
 
-void loop() 
-{
 
-    instructorCode();
-//    studentCode();
-    delay(200000);  //stop the loop for a while (200 seconds)
-}
 
 //    static int    SubLoop, Demand;
 //    static byte   Moving, CMDBuff[256], CurrentCMD;

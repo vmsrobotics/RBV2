@@ -13,28 +13,19 @@ int sonar()
   long duration;
   int reading;
   
-  for (int x=0; x < 2; x++)
-  {
-    int oldReading = reading;
     digitalWrite(trigPin, LOW);  // Clears the trigPin
     delayMicroseconds(2);
     digitalWrite(trigPin, HIGH);  // Sets the trigPin on HIGH state for 10 micro seconds
     delayMicroseconds(10);
     digitalWrite(trigPin, LOW);
     duration = pulseIn(echoPin, HIGH);  // Reads the echoPin, returns the sound wave travel time in microseconds
-    reading= duration * 0.0067;  // Calculating the distance in inches
-    delay(25);
-    if (reading != 0) 
-      { 
-        (reading += oldReading) / 2; //averaging to smooth values
-      }
-    else
-      {
-        reading = oldReading;
-      }
-  }
-  distance = reading;
-  return distance;
+    distance= duration * 0.0067;  // Calculating the distance in inches
+//    delay(25);
+    if (distance)
+    {
+      return distance;
+    }
+    
 }//end int sonar()
   
 
@@ -46,9 +37,6 @@ void sonarTurnRight(int bumpDistance, int turnDuration, byte speed, int turns)
     int counter = 0;
     leftMotorF(speed);
     rightMotorF(speed);
-    Serial.println("Initial delay");
-    delay(50);
-//    Serial.println("Initial delay complete");
     
     while (counter < turns)
       {
@@ -93,12 +81,12 @@ void sonarTurnRight(int bumpDistance, int turnDuration, byte speed, int turns)
 void sonarSerial()
 {
     int counter = 0;
+    int dist;
     while (counter < 10000)
       {
-      sonar();
-      Serial.println(distance);
+      dist = sonar();
+      Serial.println(dist);
       counter++;
-      delay(50);
       }
 }//end sonarSerial
 

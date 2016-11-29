@@ -84,4 +84,28 @@ int blue()
   delay(25);
   return frequency;
   }        
+
+void forwardColorChange(byte speed, int factor)
+{
+    Serial.print("Forward Color Change Initiated, Drive Forward, stop at change of color reading ");
+    int blueRead = blue();
+    int redRead = red();
+    while (blueRead + redRead > factor)
+    {
+      blueRead = blue();
+      redRead = red();
+      leftMotorF(speed);
+      rightMotorF(speed);
+      Serial.println(blueRead + redRead);
+    }
+    
+      stop();
+      Serial.println("Color change detected");
+      Serial.print("red =  ");
+      Serial.print(redRead);
+      Serial.print(" blue =  ");
+      Serial.println(blueRead);
+      Serial.println(blueRead + redRead);
+    
+}
  
