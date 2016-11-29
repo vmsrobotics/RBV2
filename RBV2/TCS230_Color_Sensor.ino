@@ -85,12 +85,12 @@ int colorBlue()
 void forwardColorChange(byte speed, int factor)
 {
     Serial.print("Forward Color Change Initiated, Drive Forward, stop at change of color reading ");
-    int blueRead = blue();
-    int redRead = red();
+    int blueRead = colorBlue();
+    int redRead = colorRed();
     while (blueRead + redRead > factor)
     {
-      blueRead = blue();
-      redRead = red();
+      blueRead = colorBlue();
+      redRead = colorRed();
       leftMotorF(speed);
       rightMotorF(speed);
       Serial.println(blueRead + redRead);

@@ -55,7 +55,7 @@ turnRight(750, 150);
 forwardColorChange(100, 250);
 turnRight(750, 150);
 forwardColorChange(100, 250);
-if (red() < blue())
+if (colorRed() < colorBlue())
 {
   Serial.println("Predominantly red");
   turnRight(750, 150);
