@@ -55,33 +55,30 @@ const byte S2 = 17;
 const byte S3 = 18;
 const byte Output = 19;
 
-int red()
+int colorRed()
   {
   unsigned int frequency; 
   digitalWrite(S2,LOW);
   digitalWrite(S3,LOW);//setting for RED color sensor
   frequency = pulseIn(Output, LOW);//reading frequency
-  delay(25);
   return frequency;
   }
   
-int green()
+int colorGreen()
   {
   unsigned int frequency; 
   digitalWrite(S2,HIGH);
   digitalWrite(S3,HIGH);// setting for GREEN color sensor
   frequency = pulseIn(Output, LOW);// reading frequency
-  delay(25); 
   return frequency;    
   }
  
-int blue()
+int colorBlue()
   {
   unsigned int frequency; 
   digitalWrite(S2,LOW);
   digitalWrite(S3,HIGH);// setting for BLUE color sensor
   frequency = pulseIn(Output, LOW);// reading frequency
-  delay(25);
   return frequency;
   }        
 
