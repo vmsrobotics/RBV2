@@ -6,7 +6,17 @@ void loop()
     delay(200000);  //stop the loop for a while (200 seconds)
 }
 
+//#################### Global Variables for Servo #######################
+
+#include <Servo.h>
+
+Servo myservo;  // create servo object to control a servo
+// twelve servo objects can be created on most boards
+
+int pos = 0;    // variable to store the servo position
+
 //#################### Global Variables for Gyro #######################
+
 #include "Wire.h"
 #define degconvert 57.2957786 //there are approx 57 degrees in a radian.
 
@@ -24,6 +34,8 @@ bool blinkState = false;
 void setup()
 {
   Serial.begin(115200); //Setup serial port for debugging our code
+
+  myservo.attach(12);  // attaches the servo on pin 9 to the servo object
 
 //########################## Pins for Motors ############################
 
@@ -171,6 +183,11 @@ void setup()
   
 }
 
+void servoMove(byte pos)
+{
+  myservo.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(500);    
+}
 
 
 
