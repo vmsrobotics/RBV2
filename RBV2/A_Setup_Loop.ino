@@ -36,6 +36,9 @@ void setup()
   Serial.begin(115200); //Setup serial port for debugging our code
 
   myservo.attach(12);  // attaches the servo on pin 9 to the servo object
+  myservo.write(0); //Zero the servo and wait to allow placement of the payload
+  Serial.println("Servo Zeroed");
+  delay(2000);
 
 //########################## Pins for Motors ############################
 
