@@ -5,9 +5,6 @@ bool oldMotorController = false; //set this to true if your robot is using the o
 void studentCode()
 {
 
-turnRight(1000,100);
-turnLeft(1000,100);
-
 
 
 

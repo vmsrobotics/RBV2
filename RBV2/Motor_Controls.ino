@@ -95,8 +95,7 @@
     while  (digitalRead(52) == LOW);
     {
       stop();
-      delay(100000);
-    }
+     }
   }
 
   

@@ -30,7 +30,29 @@ double compAngleX, compAngleY; //These are the angles in the complementary filte
 
 bool blinkState = false;
 
-    
+
+
+//************************* Flash LED *****************************************
+unsigned long previousMillis = 0;        // will store last time LED was updated
+int REDledState;             // ledState used to set the LED
+int GREENledState;
+
+const int RED_LED =  49;// the number of the RED LED pin
+const int GREEN_LED =  29;// the number of the GREEN LED pin
+
+void flashRED_GREEN(int interval) 
+  {  unsigned long currentMillis = millis();
+     if (currentMillis - previousMillis >= interval) // save the last time you blinked the LED
+     { 
+      previousMillis = currentMillis; 
+      GREENledState = !GREENledState;
+      REDledState = !REDledState;
+      // if the LED is off turn it on and vice-versa:
+      digitalWrite(GREEN_LED, !GREENledState);
+      digitalWrite(RED_LED, !REDledState);
+      }
+  }
+  
 void setup()
 {
   Serial.begin(115200); //Setup serial port for debugging our code
@@ -39,6 +61,9 @@ void setup()
   myservo.write(0); //Zero the servo and wait to allow placement of the payload
   Serial.println("Servo Zeroed");
   delay(2000);
+
+int REDledState = HIGH;             
+int GREENledState = LOW;
 
 //########################## Pins for Motors ############################
 
